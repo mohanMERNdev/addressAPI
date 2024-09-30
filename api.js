@@ -21,6 +21,8 @@ const openDBandInitialServer = async()=>{
     process.exit(1)
 }}
 
+app.use(express.json());
+
 app.post('/register', (request, response) => {
     const { name, address } = request.body;
     if (!name || !address) {

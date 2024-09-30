@@ -3,6 +3,8 @@ const app = express()
 const path = require("path")
 const {open}=require("sqlite")
 const sqlite3 = require("sqlite3")
+app.use(express.json());
+
 
 let dbpath = path.join(__dirname,"address.db")
 let db = null
@@ -21,10 +23,9 @@ const openDBandInitialServer = async()=>{
     process.exit(1)
 }}
 
-app.use(express.json());
 
 app.post('/register', (request, response) => {
-    const { name, address } = request.body;
+    const {name,address} = request.body;
     if (!name || !address) {
         return response.status(400).json({ message: 'Name and address are required.' });
     }
